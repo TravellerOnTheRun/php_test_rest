@@ -1,9 +1,9 @@
 <?php
     class Database {
-        private $host = 'localhost';
-        private $user = 'root';
-        private $password = 'aleksivchenko1344';
-        private $dbname = 'php_job_test';
+        private $host = 'HOST';
+        private $user = 'YOUR_USER';
+        private $password = 'YOUR_PASSWORD';
+        private $dbname = 'DATABASE_NAME';
 
 
         public function connect() {
