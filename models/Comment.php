@@ -97,14 +97,17 @@ class Comment
     public function delete()
     {
         //Create query
-        $query = "DELETE FROM $this->table WHERE id = :id";
+        $query = "DELETE FROM $this->table WHERE id = :id AND user_id = :user_id";
 
         //Prepare statement
         $stmt = $this->conn->prepare($query);
 
         //Clean and Bind data
         $stmtWithBindedParams = cleanAndBind(
-            ['id' => $this->id],
+            [
+                'id' => $this->id,
+                'user_id' => $this->user_id
+            ],
             $stmt
         );
         //Execute query

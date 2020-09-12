@@ -26,7 +26,7 @@ if ($jwt) {
         $post->title = $data->title;
         $post->body = $data->body;
         $post->author = $data->author;
-        $post->user_id = $data->user_id;
+        $post->user_id = $decoded->data->id;
         $post->id = $data->id;
         $post->description = $data->description;
 

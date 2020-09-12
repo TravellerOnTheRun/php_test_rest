@@ -69,7 +69,7 @@ class Post
                 author = :author,
                 description = :description
             WHERE 
-                id = :id
+                id = :id AND user_id = :user_id
         ";
         //Prepare Statement
         $stmt = $this->conn->prepare($query);
@@ -82,7 +82,7 @@ class Post
                 'body' => $this->body,
                 'user_id' => $this->user_id,
                 'author' => $this->author,
-                'description' =>$this->description
+                'description' => $this->description
             ],
             $stmt
         );
@@ -98,20 +98,24 @@ class Post
         return false;
     }
 
-    public function delete() {
+    public function delete()
+    {
         //Create query
-        $query = "DELETE FROM $this->table WHERE id = :id";
+        $query = "DELETE FROM $this->table WHERE id = :id AND user_id = :user_id";
 
         //Prepare statement
         $stmt = $this->conn->prepare($query);
 
         //Clean and Bind data
-         $stmtWithBindedParams = cleanAndBind(
-            ['id' => $this->id],
+        $stmtWithBindedParams = cleanAndBind(
+            [
+                'id' => $this->id,
+                'user_id' => $this->user_id
+            ],
             $stmt
         );
         //Execute query
-        if($stmtWithBindedParams->execute()) {
+        if ($stmtWithBindedParams->execute()) {
             return true;
         }
 

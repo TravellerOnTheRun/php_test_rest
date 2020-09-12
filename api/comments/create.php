@@ -25,13 +25,17 @@ if ($jwt) {
 
     $comment->body = $data->body;
     $comment->post_id = $data->post_id;
-    $comment->user_id = $data->user_id;
-    $comment->username = $data->username;
+    $comment->user_id = $decoded->data->id;
+    $comment->username = $decoded->data->name;
 
     if ($comment->create()) {
       http_response_code(201);
       echo json_encode(
-        array('message' => 'Comment posted!')
+        array(
+          'message' => 'Comment posted!',
+          'user_id' => $comment->user_id,
+          'username' => $comment->username
+        )
       );
     } else {
       http_response_code(500);
