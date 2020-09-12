@@ -31,7 +31,7 @@ $post = initializeGetRoute('post');
     echo json_encode($posts_arr);
 
   } else {
-    // No Posts
+    http_response_code(404);
     echo json_encode(
       array('message' => 'No Posts Found')
     );
